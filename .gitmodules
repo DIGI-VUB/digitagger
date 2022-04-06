@@ -1,0 +1,3 @@
+[submodule "adminlte-keycloak-theme"]
+    path = inst/keycloak/adminlte-keycloak-theme
+    url = https://github.com/MAXIMUS-DeltaWare/adminlte-keycloak-theme.git
