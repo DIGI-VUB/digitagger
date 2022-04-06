@@ -1,0 +1,8 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+data/*.xmi
+doc/vsc
+doc/img
+doc/proposal/img
