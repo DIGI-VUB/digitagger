@@ -165,6 +165,47 @@ sudo service apache2 restart
 ```
 
 ########################################################################################################
+## INCEPTION CONFIG
+##
+
+```
+cat << EOF | sudo tee /etc/apache2/sites-available/inception.conf
+<VirtualHost *:443>
+    ServerName inception.digitagger.org 
+    Include /etc/letsencrypt/options-ssl-apache.conf
+    SSLCertificateFile /etc/letsencrypt/live/digitagger.org/fullchain.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/digitagger.org/privkey.pem
+    ## Keycloak login
+    OIDCProviderMetadataURL https://iam.digitagger.org/auth/realms/dev/.well-known/openid-configuration
+    OIDCRedirectURI https://inception.digitagger.org/secure.html
+    OIDCClientSecret $KEYCLOAK_CLIENT_INCEPTION_SECRET
+    OIDCCryptoPassphrase $KEYCLOAK_CLIENT_CRYPTO
+    OIDCClientID inception-client
+    # Keep sessions alive for 10 hours
+    OIDCSessionInactivityTimeout 36000
+    OIDCSessionMaxDuration 36000    
+    # Pass on user information in the header    
+    OIDCRemoteUserClaim preferred_username
+    OIDCAuthNHeader remote_user
+    OIDCInfoHook userinfo    
+    <Location />
+      AuthType openid-connect
+      Require valid-user
+      LogLevel debug
+    </Location>
+    ProxyRequests Off
+    ProxyPreserveHost Off
+    ProxyPass / http://localhost:18080/
+    ProxyPassReverse / http://localhost:18080/
+</VirtualHost>
+EOF
+sudo a2dissite inception
+sudo a2ensite inception
+sudo apachectl configtest
+sudo service apache2 restart
+```
+
+########################################################################################################
 ## LOOK TO THE LOGS
 ##
 
