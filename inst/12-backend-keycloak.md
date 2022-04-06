@@ -5,7 +5,7 @@
 - Set up the docker container scripts
 
 ```{bash}
-mkdir --parents $DIGITAGGER_HOME/keycloak
+mkdir --parents $DIGITAGGER_HOME/inst/keycloak
 cat << EOF | sudo tee $DIGITAGGER_HOME/inst/keycloak/docker-compose.yml
 version: "3"
 services:

@@ -13,6 +13,26 @@ sudo apt install -y certbot python3-certbot python3-certbot-apache
 sudo certbot certonly --apache --preferred-challenges=dns --email jan.wijffels@vub.be --agree-tos -d *.digitagger.org
 ```
 
+- For the SSL certificate of mailserver.digitagger.org only
+
+```{bash}
+cat << EOF | sudo tee  /etc/apache2/sites-available/mailserver.conf
+<VirtualHost *:443>
+    ServerName mailserver.digitagger.org 
+    ServerAlias www.mailserver.digitagger.org 
+    DocumentRoot /var/www/html
+</VirtualHost>
+EOF
+sudo a2dissite mailserver
+sudo a2ensite mailserver
+sudo apache2ctl configtest
+sudo service apache2 restart
+
+sudo certbot certonly -d mailserver.digitagger.org --apache --dry-run
+sudo certbot certonly -d mailserver.digitagger.org --apache
+sudo a2dissite mailserver
+```
+
 ########################################################################################################
 ## Ports
 ##
@@ -74,6 +94,9 @@ cat << EOF | sudo tee  /etc/apache2/sites-available/rstudio.conf
     OIDCClientSecret $KEYCLOAK_CLIENT_RSTUDIO_SECRET
     OIDCCryptoPassphrase $KEYCLOAK_CLIENT_CRYPTO
     OIDCClientID rstudio-client
+    # Keep sessions alive for 10 hours
+    OIDCSessionInactivityTimeout 36000
+    OIDCSessionMaxDuration 36000    
     <Location />
       AuthType openid-connect
       Require valid-user
@@ -113,6 +136,10 @@ cat << EOF | sudo tee /etc/apache2/sites-available/shiny.conf
     OIDCClientSecret $KEYCLOAK_CLIENT_SHINY_SECRET
     OIDCCryptoPassphrase $KEYCLOAK_CLIENT_CRYPTO
     OIDCClientID shiny-client
+    # Keep sessions alive for 10 hours
+    OIDCSessionInactivityTimeout 36000
+    OIDCSessionMaxDuration 36000    
+    # Pass on user information in the header    
     OIDCRemoteUserClaim preferred_username
     OIDCAuthNHeader remote_user
     OIDCInfoHook userinfo
