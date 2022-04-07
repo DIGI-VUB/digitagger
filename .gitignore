@@ -9,3 +9,4 @@ doc/proposal/img
 conf/app-credentials
 *.Rproj
 .vs
+inst/old
