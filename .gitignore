@@ -6,3 +6,6 @@ data/*.xmi
 doc/vsc
 doc/img
 doc/proposal/img
+conf/app-credentials
+*.Rproj
+.vs
