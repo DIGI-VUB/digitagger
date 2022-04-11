@@ -26,9 +26,8 @@ cp $DIGITAGGER_HOME/inst/cantaloupe/cantaloupe.properties.sample $CANTALOUPE_PRO
 sed -i "s|source.static = .*|source.static = FilesystemSource|g" $CANTALOUPE_PROPERTIES_FILE
 sed -i "s|FilesystemSource.BasicLookupStrategy.path_prefix = /home/myself/images/|FilesystemSource.BasicLookupStrategy.path_prefix = $CANTALOUPE_IMAGE_PATH|" $CANTALOUPE_PROPERTIES_FILE
 sed -i "s|endpoint.admin.enabled = false|endpoint.admin.enabled = true|" $CANTALOUPE_PROPERTIES_FILE
-sed -i "s|endpoint.admin.username = .*|endpoint.admin.username = admin|g" $CANTALOUPE_PROPERTIES_FILE
+sed -i "s|endpoint.admin.username = .*|endpoint.admin.username = $CANTALOUPE_ADMIN_USER|g" $CANTALOUPE_PROPERTIES_FILE
 sed -i "s|endpoint.admin.secret =|endpoint.admin.secret = $CANTALOUPE_ADMIN_PWD|" $CANTALOUPE_PROPERTIES_FILE
-sed -i "s|endpoint.admin.secret =|endpoint.admin.secret = admin|" $CANTALOUPE_PROPERTIES_FILE
 sed -i "s|overlays.BasicStrategy.enabled = .*|overlays.BasicStrategy.enabled = true|g" $CANTALOUPE_PROPERTIES_FILE
 sed -i "s|overlays.BasicStrategy.type = .*|overlays.BasicStrategy.type = string|g" $CANTALOUPE_PROPERTIES_FILE
 sed -i "s|overlays.BasicStrategy.string = .*|overlays.BasicStrategy.string = VUB - DIGI|g" $CANTALOUPE_PROPERTIES_FILE
