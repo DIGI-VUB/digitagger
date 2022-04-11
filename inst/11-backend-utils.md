@@ -53,3 +53,12 @@ sudo apt install -y docker.io
 sudo service docker restart
 sudo chmod 666 /var/run/docker.sock
 ```
+
+
+########################################################################################################
+## Unzip
+##
+
+```{bash}
+sudo apt install -y unzip
+```

@@ -89,7 +89,10 @@ ls -l /home/ubuntu/images/
 ```
 
 - Examples
-    - https://iiif.digitagger.org/iiif/3/example.png/info.json
-    - https://iiif.digitagger.org/iiif/3/example.png/10,40,100,30/max/0/default.png
-    - https://iiif.digitagger.org/iiif/3/example.png/full/max/0/default.png
-
+    - example.png at main folder
+        - https://iiif.digitagger.org/iiif/3/example.png/info.json
+        - https://iiif.digitagger.org/iiif/3/example.png/10,40,100,30/max/0/default.png
+        - https://iiif.digitagger.org/iiif/3/example.png/full/max/0/default.png
+    - imagexyz.jpg in voorbeeld subfolder 
+        - https://iiif.digitagger.org/iiif/3/voorbeeld:imagexyz.jpg/info.json
+        - https://iiif.digitagger.org/iiif/3/voorbeeld:imagexyz.jpg/full/max/0/default.png
