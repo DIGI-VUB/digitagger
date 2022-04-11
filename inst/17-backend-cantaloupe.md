@@ -96,3 +96,11 @@ ls -l /home/ubuntu/images/
     - imagexyz.jpg in voorbeeld subfolder 
         - https://iiif.digitagger.org/iiif/3/voorbeeld:imagexyz.jpg/info.json
         - https://iiif.digitagger.org/iiif/3/voorbeeld:imagexyz.jpg/full/max/0/default.png
+    - imagexyz.jpg in voorbeeld subfolder 
+        - https://iiif.digitagger.org/iiif/3/getuigenissen:brugse-vrije:RABrugge_I15_17015_V16_02.jpg/info.json  
+        - https://iiif.digitagger.org/iiif/3/getuigenissen:brugse-vrije:RABrugge_I15_17015_V16_02.jpg/10,40,100,30/max/0/default.png
+        - https://iiif.digitagger.org/iiif/3/getuigenissen:brugse-vrije:RABrugge_I15_17015_V16_02.jpg/full/max/0/default.png
+        - https://iiif.digitagger.org/iiif/3/getuigenissen:brugse-vrije:RABrugge_I15_17038_V9_11.jpg/full/max/0/default.png
+        
+
+
