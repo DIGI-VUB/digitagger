@@ -205,6 +205,63 @@ sudo apachectl configtest
 sudo service apache2 restart
 ```
 
+
+########################################################################################################
+## CANTALOUPE CONFIG
+##
+
+```
+#<VirtualHost _default_:443>
+cat << EOF | sudo tee /etc/apache2/sites-available/iiif.conf
+<VirtualHost *:443>
+    ServerName iiif.digitagger.org
+    ServerAlias www.iiif.digitagger.org
+    Include /etc/letsencrypt/options-ssl-apache.conf
+    SSLCertificateFile /etc/letsencrypt/live/digitagger.org/fullchain.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/digitagger.org/privkey.pem
+    ProxyRequests Off
+    ProxyPreserveHost Off
+    ProxyPass / http://localhost:8182/ nocanon
+    ProxyPassReverse / http://localhost:8182/
+    ProxyPassReverseCookiePath / /    
+    ProxyPassReverseCookieDomain localhost:8182 iiif.digitagger.org
+    ProxyPreserveHost on  
+    AllowEncodedSlashes NoDecode
+    RequestHeader set X-Forwarded-Proto HTTPS
+    RequestHeader set X-Forwarded-Port 443
+    RequestHeader set X-Forwarded-Path /  
+    ## Pass user access to Keycloak for cantaloupe admin only (not for the images)
+    OIDCProviderMetadataURL https://iam.digitagger.org/auth/realms/dev/.well-known/openid-configuration
+    OIDCRedirectURI https://iiif.digitagger.org/admin/index.html
+    OIDCClientSecret $KEYCLOAK_CLIENT_INCEPTION_SECRET
+    OIDCCryptoPassphrase $KEYCLOAK_CLIENT_CRYPTO
+    OIDCClientID cantaloupe-client 
+    <Location /admin>      
+      AuthType openid-connect
+      Require valid-user
+      LogLevel debug
+    </Location>    
+</VirtualHost>
+EOF
+sudo a2dissite iiif
+sudo a2ensite iiif
+sudo apachectl configtest
+sudo service apache2 restart
+```
+
+
+https://iiif.txtminer.eu/iiif/3/example.png/info.json
+https://iiif.txtminer.eu/iiif/3/example.png/10,40,100,30/max/0/default.png
+https://iiif.txtminer.eu/iiif/3/example.png/full/max/0/default.png
+
+https://iiif.txtminer.eu/iiif/3/example2.png/full/max/0/default.png
+
+https://iiif.txtminer.eu/iiif/3/FelixArchief_V_92_022b.jpg/info.json
+https://iiif.txtminer.eu/iiif/3/FelixArchief_V_92_022b.jpg/10,40,100,30/max/0/default.jpg
+https://iiif.txtminer.eu/iiif/3/FelixArchief_V_92_022b.jpg/full/max/0/default.jpg
+https://iiif.txtminer.eu/iiif/3/FelixArchief_V_92_022b.jpg/10,40,100,30/max/0/default.jpg
+
+
 ########################################################################################################
 ## LOOK TO THE LOGS
 ##
