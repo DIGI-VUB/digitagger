@@ -15,6 +15,16 @@ sudo apt -y autoremove
 sudo apt install -y r-base r-base-dev
 ```
 
+- upgrade R to latest version 
+
+```{bash}
+sudo apt update -qq
+wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
+sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
+sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+
+sudo apt upgrade
+```
+
 ########################################################################################################
 ## RStudio
 ## 
