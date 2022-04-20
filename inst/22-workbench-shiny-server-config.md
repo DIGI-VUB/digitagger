@@ -13,7 +13,7 @@ server {
   ##
   ## Default shiny apps - it works 
   ##
-  location / {
+  location /home {
     site_dir /srv/shiny-server;
     log_dir /var/log/shiny-server;
     directory_index on;
@@ -21,7 +21,7 @@ server {
   ##
   ## User Shiny apps running under /home/userxyz/ShinyApps
   ##
-  location /user {
+  location / {
     user_apps;
     directory_index on;
   }
