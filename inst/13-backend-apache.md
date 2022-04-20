@@ -106,10 +106,14 @@ cat << EOF | sudo tee  /etc/apache2/sites-available/rstudio.conf
     <Proxy *>
       Allow from localhost
     </Proxy>
+    RewriteEngine on
+    RewriteCond %{HTTP:Upgrade} =websocket
+    RewriteRule /(.*)     ws://$IP_WERKBANK:8787/\$1  [P,L]
+    RewriteCond %{HTTP:Upgrade} !=websocket
+    RewriteRule /(.*)     http://$IP_WERKBANK:8787/\$1 [P,L]
     ProxyPass / http://$IP_WERKBANK:8787/
     ProxyPassReverse / http://$IP_WERKBANK:8787/
-    ProxyPreserveHost On
-    RequestHeader set X-Forwarded-Proto https
+    ProxyRequests Off     
 </VirtualHost>
 EOF
 sudo a2dissite rstudio
@@ -132,8 +136,7 @@ cat << EOF | sudo tee /etc/apache2/sites-available/shiny.conf
     SSLCertificateKeyFile /etc/letsencrypt/live/digitagger.org/privkey.pem
     ## Keycloak login
     OIDCProviderMetadataURL https://iam.digitagger.org/auth/realms/dev/.well-known/openid-configuration  
-    #OIDCRedirectURI https://apps.digitagger.org/user/protected/
-    OIDCRedirectURI https://apps.digitagger.org/user/app/protected
+    OIDCRedirectURI https://apps.digitagger.org/app/protected
     OIDCClientSecret $KEYCLOAK_CLIENT_SHINY_SECRET
     OIDCCryptoPassphrase $KEYCLOAK_CLIENT_CRYPTO
     OIDCClientID shiny-client
@@ -145,21 +148,22 @@ cat << EOF | sudo tee /etc/apache2/sites-available/shiny.conf
     OIDCAuthNHeader remote_user
     OIDCInfoHook userinfo
     ## Mapping as follows
-    ##  - https://apps.digitagger.org/user/userxyz/open/    open access
-    ##  - https://apps.digitagger.org/user/userxyz/appname/ no open access - needs to belong to group userxyz/appname in Keycloak
+    ##  - https://apps.digitagger.org/userxyz/open/    open access
+    ##  - https://apps.digitagger.org/userxyz/public/  open access
+    ##  - https://apps.digitagger.org/userxyz/appname/ no open access - needs to belong to group userxyz/appname in Keycloak
     ##  - <LocationMatch "^/user/(?<klantnaam>[^/]+)"> 
-    <LocationMatch "^/user/(?<klantnaam>[^/]+)/(?<appnaam>[^/]+)"> 
+    <LocationMatch "^/(?<klantnaam>[^/]+)/(?<appnaam>[^/]+)"> 
       Require claim "groupmembership:%{env:MATCH_KLANTNAAM}/%{env:MATCH_APPNAAM}" 
       AuthType openid-connect 
     </LocationMatch>   
-    <LocationMatch "^/user/.+/open/"> 
+    <LocationMatch "^/.+/open/"> 
       Require all granted
       AuthType openid-connect 
     </LocationMatch>  
-    <LocationMatch "^(?!.*(user))"> 
+    <LocationMatch "^/.+/public/"> 
       Require all granted
       AuthType openid-connect 
-    </LocationMatch>        
+    </LocationMatch>            
     ## Proxy setup
     <Proxy *>
       Allow from localhost
