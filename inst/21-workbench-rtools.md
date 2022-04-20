@@ -52,3 +52,18 @@ rm shiny-server-1.5.17.973-amd64.deb
 sudo systemctl status shiny-server
 sudo service shiny-server status
 ```
+
+
+########################################################################################################
+## R package dependencies
+## 
+
+```{bash}
+sudo apt update
+sudo apt install -y libxml2-dev
+sudo apt install -y libcurl4-openssl-dev
+sudo apt install -y libmagick++-dev
+sudo apt install -y libudunits2-dev
+sudo apt install -y libgdal-dev
+sudo apt install -y libpq-dev
+```
