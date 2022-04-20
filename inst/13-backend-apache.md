@@ -131,8 +131,9 @@ cat << EOF | sudo tee /etc/apache2/sites-available/shiny.conf
     SSLCertificateFile /etc/letsencrypt/live/digitagger.org/fullchain.pem
     SSLCertificateKeyFile /etc/letsencrypt/live/digitagger.org/privkey.pem
     ## Keycloak login
-    OIDCProviderMetadataURL https://iam.digitagger.org/auth/realms/dev/.well-known/openid-configuration
-    OIDCRedirectURI https://apps.digitagger.org/secure.html
+    OIDCProviderMetadataURL https://iam.digitagger.org/auth/realms/dev/.well-known/openid-configuration  
+    #OIDCRedirectURI https://apps.digitagger.org/user/protected/
+    OIDCRedirectURI https://apps.digitagger.org/user/app/protected
     OIDCClientSecret $KEYCLOAK_CLIENT_SHINY_SECRET
     OIDCCryptoPassphrase $KEYCLOAK_CLIENT_CRYPTO
     OIDCClientID shiny-client
@@ -143,19 +144,29 @@ cat << EOF | sudo tee /etc/apache2/sites-available/shiny.conf
     OIDCRemoteUserClaim preferred_username
     OIDCAuthNHeader remote_user
     OIDCInfoHook userinfo
-    ## TODO: define a mapping like https://apps.digitagger.org/user/xyz
-    #<Location />
-    #  AuthType openid-connect
-    #  Require valid-user
-    #  LogLevel debug
-    #</Location>
+    ## Mapping as follows
+    ##  - https://apps.digitagger.org/user/userxyz/open/    open access
+    ##  - https://apps.digitagger.org/user/userxyz/appname/ no open access - needs to belong to group userxyz/appname in Keycloak
+    ##  - <LocationMatch "^/user/(?<klantnaam>[^/]+)"> 
+    <LocationMatch "^/user/(?<klantnaam>[^/]+)/(?<appnaam>[^/]+)"> 
+      Require claim "groupmembership:%{env:MATCH_KLANTNAAM}/%{env:MATCH_APPNAAM}" 
+      AuthType openid-connect 
+    </LocationMatch>   
+    <LocationMatch "^/user/.+/open/"> 
+      Require all granted
+      AuthType openid-connect 
+    </LocationMatch>  
+    <LocationMatch "^(?!.*(user))"> 
+      Require all granted
+      AuthType openid-connect 
+    </LocationMatch>        
     ## Proxy setup
     <Proxy *>
       Allow from localhost
     </Proxy>
     RequestHeader set X-Forwarded-Proto https
     ProxyPass / http://$IP_WERKBANK:3838/
-    ProxyPassReverse / http://$IP_WERKBANK:3838/
+    ProxyPassReverse / http://$IP_WERKBANK:3838/  
 </VirtualHost>
 EOF
 sudo a2dissite shiny

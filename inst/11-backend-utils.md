@@ -22,6 +22,9 @@ sudo apt install -y apache2
 sudo apt install -y libapache2-mod-proxy-html
 sudo apt install -y libxml2-dev
 sudo apt install -y libapache2-mod-auth-openidc
+wget https://github.com/zmartzone/mod_auth_openidc/releases/download/v2.4.11.1/libapache2-mod-auth-openidc_2.4.11.1-1.focal+1_amd64.deb
+sudo dpkg -i libapache2-mod-auth-openidc_2.4.11.1-1.focal+1_amd64.deb
+rm libapache2-mod-auth-openidc_2.4.11.1-1.focal+1_amd64.deb
 service apache2 status
 sudo a2enmod ssl
 sudo a2enmod proxy
