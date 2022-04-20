@@ -7,7 +7,7 @@ Work in progress
 - Apps Shiny: https://apps.digitagger.org
 - RStudio: https://rstudio.digitagger.org
 - Keycloak: https://iam.digitagger.org
-## Example Shiny apps
+### Example Shiny apps
 
 - Open apps
     - https://apps.digitagger.org/digi/open/getuigenissen-search
@@ -21,5 +21,5 @@ Work in progress
 - Inception is configured with proxy-based authentication through Keycloak
 - Shiny applications
     - can be put at /home/userxyz/Shinyapps/open
-    - can be put at /home/userxyz/Shinyapps/projectxyz which you to belong to group userxyz/projectxyz in Keycloak to be able to access it
-- Cantaloupe is open accessible the admin which uses the Cantaloupe login configuration
+    - can be put at /home/userxyz/Shinyapps/projectxyz which require you to belong to group userxyz/projectxyz in Keycloak to be able to access it
+- Cantaloupe is open accessible for IIIF, the `/admin` URI uses the Cantaloupe login configuration
