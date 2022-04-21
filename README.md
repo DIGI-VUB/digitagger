@@ -4,7 +4,7 @@ Work in progress
 
 - Cantaloupe: https://iiif.digitagger.org
 - Inception: https://inception.digitagger.org
-- Apps Shiny: https://apps.digitagger.org
+- Apps Shiny: https://apps.digitagger.org/home/
 - RStudio: https://rstudio.digitagger.org
 - Keycloak: https://iam.digitagger.org
 ### Example Shiny apps
