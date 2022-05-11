@@ -10,3 +10,6 @@ conf/app-credentials
 *.Rproj
 .vs
 inst/old
+inst/tests
+inst/00-connect.md
+inst/00-connect-extra.md
