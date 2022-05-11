@@ -11,6 +11,7 @@ Work in progress
 
 - Open apps
     - https://apps.digitagger.org/digi/open/getuigenissen-search
+    - https://apps.digitagger.org/digi/open/getuigenissen2-search
     - https://apps.digitagger.org/digi/open/getuigenissen/getuigenissen-geocoding.Rmd
 - Apps where a login is required (and user needs to be part of the group e.g digi/xyz, digi/test)
     - https://apps.digitagger.org/digi/xyz
