@@ -7,6 +7,8 @@ Work in progress
 - Apps Shiny: https://apps.digitagger.org/home/
 - RStudio: https://rstudio.digitagger.org
 - Keycloak: https://iam.digitagger.org
+- BRAT: https://brat.digitagger.org
+
 ### Example Shiny apps
 
 - Open apps
@@ -16,6 +18,7 @@ Work in progress
 - Apps where a login is required (and user needs to be part of the group e.g digi/xyz, digi/test)
     - https://apps.digitagger.org/digi/xyz
     - https://apps.digitagger.org/digi/test
+
 ### Authentication
 
 - Keycloak and RStudio are configured with 2FA
