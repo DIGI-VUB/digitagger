@@ -53,6 +53,14 @@ sudo systemctl status shiny-server
 sudo service shiny-server status
 ```
 
+########################################################################################################
+## RETICULATE
+## 
+
+```{bash}
+sudo R -e "install.packages('reticulate', repos = 'https://cloud.r-project.org/')"
+```
+
 
 ########################################################################################################
 ## R package dependencies
