@@ -73,3 +73,27 @@ sudo docker logs clariah-keycloak
 sudo sh -c "truncate -s 0 /var/lib/docker/containers/*/*-json.log"
 cd /var/lib/docker/containers/
 ```
+
+- Configuration
+    - <img src="https://avatars.githubusercontent.com/u/62653831?s=400&u=5a22128cd3bfae334b8a2c34d59261ab4bdb7cac&v=4" alt="logo" style="width:90px;height:90px"><div class="kc-logo-text"><span>digitagger admin</span></div>
+    - <img src="https://avatars.githubusercontent.com/u/62653831?s=400&u=5a22128cd3bfae334b8a2c34d59261ab4bdb7cac&v=4" alt="logo" style="width:90px;height:90px"><div class="kc-logo-text"><span>digitagger apps</span></div>    
+    - clients: 
+        - rstudio-client confidential with `Valid Redirect URIs`: https://rstudio.digitagger.org/*
+        - shiny-client: confidential with `Valid Redirect URIs`: https://apps.digitagger.org/app/*
+        - inception-client: confidential with `Valid Redirect URIs`: https://inception.digitagger.org/*
+        - cantaloupe-client confidential with `Valid Redirect URIs`: https://iiif.digitagger.org/administration/*
+
+- Dev on startup:
+
+- Following scripts should be put at /opt/jboss/startup-scripts/
+
+```
+sudo docker exec -it --env-file=$DIGITAGGER_HOME/inst/.env clariah-keycloak bash
+KCADM="/opt/jboss/keycloak/bin/kcadm.sh"
+${KCADM} config credentials --server http://localhost:8080/auth --realm master --user ${KEYCLOAK_ADMIN_USER} --password ${KEYCLOAK_ADMIN_PWD}
+${KCADM} create clients -r dev -s clientId=test -s enabled=true -s publicClient=false -s 'redirectUris=["https://apps.digitagger.org/app/*"]' -s clientAuthenticatorType=client-secret -s secret=${KEYCLOAK_CLIENT_SHINY_SECRET}
+${KCADM} get clients -r dev --fields id,clientId
+
+```
+
+
