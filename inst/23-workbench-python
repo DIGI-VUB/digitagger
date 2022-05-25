@@ -1,0 +1,47 @@
+####################################################
+## Python
+## 
+
+```{bash}
+sudo apt install -y python3-pip
+```
+
+#### Torch
+
+- server runs Python 3.8.10 with Cuda toolkit 10.1
+
+```{bash}
+sudo apt install -y nvidia-cuda-toolkit
+nvcc -V
+nvcc: NVIDIA (R) Cuda compiler driver     
+Copyright (c) 2005-2019 NVIDIA Corporation
+Built on Sun_Jul_28_19:07:16_PDT_2019
+Cuda compilation tools, release 10.1, V10.1.243
+```
+
+```{bash}
+wget https://download.pytorch.org/whl/cu101/torch-1.8.1%2Bcu101-cp38-cp38-linux_x86_64.whl
+```
+
+#### Python packages for user digi
+
+```{bash}
+sudo su digi
+bash
+pip install spacy
+pip install spacy-udpipe
+pip install python_crfsuite
+pip install scikit-learn==1.0.1
+pip install sklearn-crfsuite
+pip install gensim
+pip install pandas
+pip install numpy
+pip install pycaprio
+pip install dkpro-cassis
+pip install translitcodec
+pip install python-dotenv
+pip install https://download.pytorch.org/whl/cu101/torch-1.8.1%2Bcu101-cp38-cp38-linux_x86_64.whl
+pip install https://github.com/explosion/spacy-models/releases/download/nl_core_news_sm-3.3.0/nl_core_news_sm-3.3.0.tar.gz
+pip install https://github.com/explosion/spacy-models/releases/download/nl_core_news_md-3.3.0/nl_core_news_md-3.3.0.tar.gz
+pip install pyarrow
+```
