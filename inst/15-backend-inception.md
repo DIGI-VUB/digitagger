@@ -179,3 +179,13 @@ sudo systemctl stop inception
 sudo systemctl start inception
 sudo service apache2 restart
 ```
+
+
+### Add other inception editors
+
+```
+sudo mkdir /srv/inception/editors
+sudo git clone https://github.com/inception-project/inception-doccano-sequence-editor-plugin.git /srv/inception/editors/doccano
+sudo git clone https://github.com/inception-project/inception-recogito-editor-plugin.git /srv/inception/editors/recogito
+sudo chown -R www-data:www-data /srv/inception/editors
+```
