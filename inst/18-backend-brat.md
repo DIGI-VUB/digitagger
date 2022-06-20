@@ -33,8 +33,8 @@ sudo chown -R www-data:developers $BRAT_HOME/brat
 sudo chown -R www-data:developers $BRAT_HOME/brat/data
 sudo chown -R www-data:developers $BRAT_HOME/brat/work
 sudo chmod +rwx $BRAT_HOME/brat/data
-sudo chown -R www-data:digi $BRAT_HOME/brat/data/Getuigenissen
-sudo chown -R www-data:digi $BRAT_HOME/brat/data/tryouts
+#sudo chown -R www-data:digi $BRAT_HOME/brat/data/Getuigenissen
+#sudo chown -R www-data:digi $BRAT_HOME/brat/data/tryouts
 ```
 
 ```{bash}
