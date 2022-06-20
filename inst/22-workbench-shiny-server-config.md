@@ -22,7 +22,8 @@ server {
   ## User Shiny apps running under /home/userxyz/ShinyApps
   ##
   location / {
-    user_apps;
+    run_as :HOME_USER:;
+    user_dirs;  
     directory_index on;
   }
 }
