@@ -265,6 +265,31 @@ sudo service apache2 restart
 
 
 ########################################################################################################
+## API of NLP webservices
+##
+
+```{bash}
+cat << EOF | sudo tee  /etc/apache2/sites-available/nlp-api.conf
+<VirtualHost *:443>
+    ServerName nlp-api.digitagger.org
+    Include /etc/letsencrypt/options-ssl-apache.conf
+    SSLCertificateFile /etc/letsencrypt/live/digitagger.org/fullchain.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/digitagger.org/privkey.pem
+    ProxyRequests On
+    ProxyPreserveHost On
+    ProxyPass / http://$IP_WERKBANK:5000/
+    ProxyPassReverse / http://$IP_WERKBANK:5000/
+</VirtualHost>
+EOF
+sudo a2dissite nlp-api
+sudo a2ensite nlp-api
+sudo apache2ctl configtest
+sudo service apache2 restart
+cat  /etc/apache2/sites-available/nlp-api.conf
+```
+
+
+########################################################################################################
 ## LOOK TO THE LOGS
 ##
 
