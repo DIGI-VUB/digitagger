@@ -9,6 +9,7 @@ doc/proposal/img
 conf/app-credentials
 *.Rproj
 .vs
+*grid.run
 inst/old
 inst/tests
 inst/00-connect.md
