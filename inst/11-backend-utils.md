@@ -9,6 +9,8 @@
 
 ```{bash}
 sudo apt-get update
+sudo apt-get install -y net-tools
+netstat -plunt
 sudo apt-get install -y bmon slurm tcptrack
 bmon
 ```

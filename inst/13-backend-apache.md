@@ -269,23 +269,29 @@ sudo service apache2 restart
 ##
 
 ```{bash}
-cat << EOF | sudo tee  /etc/apache2/sites-available/nlp-api.conf
+cat << EOF | sudo tee  /etc/apache2/sites-available/predict.conf
 <VirtualHost *:443>
-    ServerName nlp-api.digitagger.org
+    ServerName predict.digitagger.org
     Include /etc/letsencrypt/options-ssl-apache.conf
     SSLCertificateFile /etc/letsencrypt/live/digitagger.org/fullchain.pem
     SSLCertificateKeyFile /etc/letsencrypt/live/digitagger.org/privkey.pem
+    LogLevel debug
+    <Proxy *>
+      Allow from localhost
+    </Proxy>
+    RequestHeader set X-Forwarded-Proto https
     ProxyRequests On
-    ProxyPreserveHost On
-    ProxyPass / http://$IP_WERKBANK:5000/
+    ProxyPreserveHost On    
+    RewriteEngine on
+    RewriteRule /(.*) http://$IP_WERKBANK:5000/\$1 [P,L]
     ProxyPassReverse / http://$IP_WERKBANK:5000/
 </VirtualHost>
 EOF
-sudo a2dissite nlp-api
-sudo a2ensite nlp-api
+sudo a2dissite predict
+sudo a2ensite predict
 sudo apache2ctl configtest
 sudo service apache2 restart
-cat  /etc/apache2/sites-available/nlp-api.conf
+cat  /etc/apache2/sites-available/predict.conf
 ```
 
 

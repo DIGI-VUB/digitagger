@@ -98,4 +98,6 @@ sudo apt install -y docker docker.io
 
 ```
 sudo apt install --yes --no-install-recommends wget
+sudo apt install --yes net-tools
+sudo netstat -plnt
 ```
