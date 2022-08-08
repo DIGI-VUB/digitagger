@@ -72,6 +72,11 @@ sudo service shiny-server status
 
 ```{bash}
 sudo apt install -y r-cran-reticulate
+sudo apt install -y r-cran-opencv
+sudo apt install -y r-cran-magick
+sudo apt install -y r-cran-sf
+sudo apt install -y r-cran-units
+sudo apt install -y r-cran-rappdirs
 ```
 
 
