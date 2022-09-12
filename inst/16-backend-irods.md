@@ -32,7 +32,9 @@ rm -rf \
   ./libssl1.0.0_1.0.2n-1ubuntu5.8_amd64.deb
 sudo apt install -y irods-icommands
 ils
+sudo python3 -m pip install --upgrade pip
 sudo apt install -y python3-pip
+python3 -m pip install --upgrade pip
 pip install python-irodsclient
 ```
 
@@ -162,7 +164,8 @@ EOF
 
 ```{bash}
 irodsfs --help
-mkdir --parents $IRODS_FUSE_HOME
+sudo mkdir --parents $IRODS_FUSE_HOME
+sudo chown -R ubuntu:ubuntu /mnt/digishare/irods
 irodsfs -config ~/.irods/config.yaml $IRODS_FUSE_HOME
 ```
 
