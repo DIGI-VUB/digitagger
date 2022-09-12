@@ -71,21 +71,22 @@ sudo journalctl --vacuum-time=1s
 
 ## Specific for the server itself
 
-- Location of images
+- Location of images at /mnt/digishare/iiif/images and  /home/ubuntu/iiif/images points to there
 
 ```{bash}
-mkdir /mnt/digishare/iiif
+sudo mkdir /mnt/digishare/iiif
+sudo chown ubuntu:ubuntu /mnt/digishare/iiif
 mkdir /mnt/digishare/iiif/images
 mkdir /home/ubuntu/iiif
 ln -s /mnt/digishare/iiif/images /home/ubuntu/iiif/images
 ```
 
-- Upload images in /home/ubuntu/images
+- Upload images in /home/ubuntu/iiif/images
 
-```{bash}
-mkdir /home/ubuntu/images/
-cp /home/ubuntu/example.png /home/ubuntu/images/
-ls -l /home/ubuntu/images/
+```
+cp /mnt/digishare/irods/irodsfuse/vsc10311/example.png /mnt/digishare/iiif/images/
+mkdir /mnt/digishare/iiif/images/voorbeeld
+cp /mnt/digishare/irods/irodsfuse/vsc10311/example.png /mnt/digishare/iiif/images/voorbeeld/imagexyz.png
 ```
 
 - Examples
@@ -93,6 +94,9 @@ ls -l /home/ubuntu/images/
         - https://iiif.digitagger.org/iiif/3/example.png/info.json
         - https://iiif.digitagger.org/iiif/3/example.png/10,40,100,30/max/0/default.png
         - https://iiif.digitagger.org/iiif/3/example.png/full/max/0/default.png
+    - imagexyz.png in voorbeeld subfolder 
+        - https://iiif.digitagger.org/iiif/3/voorbeeld:imagexyz.png/info.json
+        - https://iiif.digitagger.org/iiif/3/voorbeeld:imagexyz.png/full/max/0/default.png        
     - imagexyz.jpg in voorbeeld subfolder 
         - https://iiif.digitagger.org/iiif/3/voorbeeld:imagexyz.jpg/info.json
         - https://iiif.digitagger.org/iiif/3/voorbeeld:imagexyz.jpg/full/max/0/default.png
