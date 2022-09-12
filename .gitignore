@@ -13,3 +13,4 @@ conf/app-credentials
 inst/old
 inst/tests
 inst/03-environment-variables.md
+doc/proposal
