@@ -9,7 +9,7 @@ source $HOME/.virtualenvs/nlp-api/bin/activate
 cd $HOME/.virtualenvs/nlp-api
 pip install wheel
 pip install cupy-cuda114
-pip install 'spacy[cuda114,transformers,lookups]'
+pip install 'spacy[cuda114,transformers,lookups]==3.2.2'
 pip install spacy-udpipe
 pip install python_crfsuite
 pip install scikit-learn==1.0.1
@@ -23,8 +23,10 @@ pip install translitcodec
 pip install python-dotenv
 pip install pyarrow
 pip install flask
-pip install https://github.com/explosion/spacy-models/releases/download/nl_core_news_sm-3.3.0/nl_core_news_sm-3.3.0.tar.gz
-pip install https://github.com/explosion/spacy-models/releases/download/nl_core_news_md-3.3.0/nl_core_news_md-3.3.0.tar.gz
+pip install https://github.com/explosion/spacy-models/releases/download/nl_core_news_sm-3.2.0/nl_core_news_sm-3.2.0-py3-none-any.whl
+pip install https://github.com/explosion/spacy-models/releases/download/nl_core_news_md-3.2.0/nl_core_news_md-3.2.0-py3-none-any.whl
+#pip install https://github.com/explosion/spacy-models/releases/download/nl_core_news_sm-3.2.0/nl_core_news_sm-3.2.0.tar.gz
+#pip install https://github.com/explosion/spacy-models/releases/download/nl_core_news_md-3.3.0/nl_core_news_md-3.3.0.tar.gz
 #pip install https://download.pytorch.org/whl/cu101/torch-1.8.1%2Bcu101-cp38-cp38-linux_x86_64.whl
 pip install torch
 pip install spacy-transformers
@@ -79,8 +81,11 @@ Device 0 PCI Bus ID          : 0000:00:07.0
 sudo su digi
 cd $HOME/getuigenissen-ne
 source $HOME/.virtualenvs/nlp-api/bin/activate
-nohup python3 $HOME/getuigenissen-ne/src/api.py &
+lsof -i :5000
+kill -9 $(lsof -ti:5000)
+rm $HOME/getuigenissen-ne/src/api.log
 nohup python3 $HOME/getuigenissen-ne/src/api.py  >> $HOME/getuigenissen-ne/src/api.log 2>&1 &
+nohup python3 $HOME/getuigenissen-ne/src/api.py &
 ```
 
 
