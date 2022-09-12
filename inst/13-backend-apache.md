@@ -10,7 +10,11 @@ sudo apt install -y certbot python3-certbot python3-certbot-apache
 
 ```{bash}
 ## Execute the following (wildcard subdomain certificate for digitagger.org) + add the DNS TXT record with name `_acme-challenge.digitagger.org` to the DNS entry 
-sudo certbot certonly --apache --preferred-challenges=dns --email jan.wijffels@vub.be --agree-tos -d *.digitagger.org
+sudo certbot certonly --manual --preferred-challenges=dns --email jan.wijffels@vub.be --agree-tos -d *.digitagger.org
+#sudo certbot certonly --apache --preferred-challenges=dns --email jan.wijffels@vub.be --agree-tos -d *.digitagger.org
+## At renewal, use the same code, adding the DNS TXT record with name `_acme-challenge.digitagger.org` to the DNS entry (you get the code to upload when executing below)
+sudo certbot certonly --manual --preferred-challenges=dns --email jan.wijffels@vub.be --agree-tos -d *.digitagger.org --dry-run
+sudo certbot certonly --manual --preferred-challenges=dns --email jan.wijffels@vub.be --agree-tos -d *.digitagger.org
 ```
 
 - For the SSL certificate of mailserver.digitagger.org only
