@@ -93,3 +93,7 @@ sudo apt install -y libudunits2-dev
 sudo apt install -y libgdal-dev
 sudo apt install -y libpq-dev
 ```
+
+```{bash}
+sudo apt install -y r-cran-odbc
+```
